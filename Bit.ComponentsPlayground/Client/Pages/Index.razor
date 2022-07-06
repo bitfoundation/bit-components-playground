@@ -1,15 +1,49 @@
 ﻿@page "/"
+@using System.Globalization
 
 <PageTitle>Bit Components Playground</PageTitle>
 
-<BitButton Class="sample-button" OnClick="IncreaseCounter">Bit Blazor UI is @Text x @Counter!</BitButton>
+<BitDatePicker Class="bit-dtp-rtl" GoToToday="برو به امروز" Style="width: 300px" FormatDate="yyyy/MM/dd hh:mm tt" Culture="GetPersianCulture()"></BitDatePicker>
 
 @code {
-    string Text = "Awsome";
-    int Counter = 1;
+    DateTimeOffset SelectedDate = DateTimeOffset.Now;
 
-    void IncreaseCounter()
+    CultureInfo GetPersianCulture()
     {
-        Counter++;
+        var cultureInfo = CultureInfo.CreateSpecificCulture("fa-IR");
+
+        cultureInfo.DateTimeFormat.MonthNames = new[]
+        {
+            "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند", ""
+         };
+
+        cultureInfo.DateTimeFormat.AbbreviatedMonthNames = new[]
+        {
+            "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند", ""
+        };
+
+        cultureInfo.DateTimeFormat.MonthGenitiveNames = cultureInfo.DateTimeFormat.MonthNames;
+        cultureInfo.DateTimeFormat.AbbreviatedMonthGenitiveNames = cultureInfo.DateTimeFormat.AbbreviatedMonthNames;
+        cultureInfo.DateTimeFormat.DayNames = new[]
+        {
+            "یکشنبه", "دوشنبه", "ﺳﻪشنبه", "چهارشنبه", "پنجشنبه", "جمعه", "شنبه"
+        };
+
+        cultureInfo.DateTimeFormat.AbbreviatedDayNames = new[]
+        {
+            "ی", "د", "س", "چ", "پ", "ج", "ش"
+        };
+
+        cultureInfo.DateTimeFormat.ShortestDayNames = new[]
+        {
+            "ی", "د", "س", "چ", "پ", "ج", "ش"
+        };
+
+        cultureInfo.DateTimeFormat.AMDesignator = "ق.ظ";
+        cultureInfo.DateTimeFormat.PMDesignator = "ب.ظ";
+        cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
+        cultureInfo.DateTimeFormat.FirstDayOfWeek = DayOfWeek.Saturday;
+
+        return cultureInfo;
     }
 }
