@@ -3,10 +3,14 @@
 
 <PageTitle>Bit Components Playground</PageTitle>
 
-<BitDatePicker Class="bit-dtp-rtl" GoToToday="برو به امروز" Style="width: 300px" FormatDate="yyyy/MM/dd hh:mm tt" Culture="GetPersianCulture()"></BitDatePicker>
+<BitDatePicker @bind-Value="SelectedDate" Class="bit-dtp-rtl" GoToToday="برو به امروز" Style="width: 300px" FormatDate="yyyy/MM/dd hh:mm tt" Culture="GetPersianCulture()"></BitDatePicker>
+
+<hr />
+
+@SelectedDate?.Date.ToLongDateString()
 
 @code {
-    DateTimeOffset SelectedDate = DateTimeOffset.Now;
+    DateTimeOffset? SelectedDate = DateTimeOffset.Now;
 
     CultureInfo GetPersianCulture()
     {
@@ -15,7 +19,7 @@
         cultureInfo.DateTimeFormat.MonthNames = new[]
         {
             "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند", ""
-         };
+        };
 
         cultureInfo.DateTimeFormat.AbbreviatedMonthNames = new[]
         {
